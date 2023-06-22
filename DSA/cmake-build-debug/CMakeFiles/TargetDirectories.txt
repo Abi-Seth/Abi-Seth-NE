@@ -1,0 +1,3 @@
+C:/Users/abc/Desktop/studies/class/Notes/PRACTICAL_NE/NE_DSA_CODE/cmake-build-debug/CMakeFiles/NE_DSA_CODE.dir
+C:/Users/abc/Desktop/studies/class/Notes/PRACTICAL_NE/NE_DSA_CODE/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/abc/Desktop/studies/class/Notes/PRACTICAL_NE/NE_DSA_CODE/cmake-build-debug/CMakeFiles/rebuild_cache.dir
