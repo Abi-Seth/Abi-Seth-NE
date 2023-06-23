@@ -1,0 +1,179 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is the documentation for Abijuru Seth NE Mobile-Dev APIs",
+        "version": "1.0.0",
+        "title": "NE End Year 3 Mobile Dev APIs Service Documentation",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "email": "abiheloaf@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "host": "localhost:5000",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Authentication",
+            "description": "All APIS which are related to user authentication and authorization.",
+            "externalDocs": {
+                "description": "Application Authentication and Authorization:",
+                "url": "http://localhost:3000/dashboard"
+            }
+        }
+    ],
+    "schemes": ["http", "https"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+        "/v1/api/user/": {
+            "post": {
+                "tags": ["Authentication"],
+                "summary": "Register new user",
+                "description": "Register a new user and add administration privileges to the user",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User object that we want to be added to the database",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "names",
+                                "password",
+                                "email"
+                            ],
+                            "properties": {
+                                "names": {
+                                    "type": "string",
+                                    "uniqueItems": true
+                                },
+                                "address": {
+                                    "type": "string",
+                                    "uniqueItems": true
+                                },
+                                "email": {
+                                    "type": "string",
+                                    "uniqueItems": true
+                                },
+                                "phone": {
+                                    "type": "string",
+                                    "uniqueItems": true
+                                },
+                                "nationalId": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                },
+                                "isAdmin": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "User created successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized! Please first login"
+                    },
+                    "403": {
+                        "description": "User with details ( nationalId / phone / email ) already exist"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/v1/api/user/current": {
+            "get": {
+                "tags": ["Authentication"],
+                "summary": "Get an existing user data",
+                "description": "Get an existing user data",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer token for user authorization",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User found"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/v1/api/user/login": {
+            "post": {
+                "tags": ["Authentication"],
+                "summary": "Login an existing user",
+                "description": "Login an existing user",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User object that we want to be authenaticated",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "required": ["email", "password", "rememberMe"],
+                            "properties": {
+                                "email": {
+                                    "type": "string",
+                                    "uniqueItems": true
+                                },
+                                "password": {
+                                    "type": "string"
+                                },
+                                "rememberMe": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "You are logged in"
+                    },
+                    "400": {
+                        "description": "Incorrect email or password"
+                    },
+                    "404": {
+                        "description": "Incorrect email or password"
+                    }
+                }
+            }
+        }
+    }
+}

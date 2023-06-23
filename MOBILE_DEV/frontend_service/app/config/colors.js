@@ -1,0 +1,6 @@
+export const BLUE = '#6366F1'
+export const GRAY = '#EBEDE7'
+export const DIM_BLUE = '#EBF5FB'
+export const WHITE = '#FFFFFF'
+export const BLACK = '#1C2833'
+export const RED = '#E74C3C'
