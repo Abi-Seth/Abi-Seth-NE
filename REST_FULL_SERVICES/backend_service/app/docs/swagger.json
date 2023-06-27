@@ -1,0 +1,310 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is the documentation for Abijuru Seth NE Rest-full APIs",
+        "version": "1.0.0",
+        "title": "RTB-EDS APIs Service Documentation",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "email": "abiheloaf@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "host": "localhost:5000",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Authentication",
+            "description": "All APIS which are related to user authentication and authorization.",
+            "externalDocs": {
+                "description": "Application Authentication and Authorization:",
+                "url": "http://localhost:3000/dashboard"
+            }
+        },
+        {
+            "name": "Equipments",
+            "description": "All APIS which are related to Equipments Management.",
+            "externalDocs": {
+                "description": "Application Authentication and Authorization:",
+                "url": "http://localhost:3000/dashboard"
+            }
+        }
+    ],
+    "schemes": ["http", "https"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+        "/v1/api/user/": {
+            "post": {
+                "tags": ["Authentication"],
+                "summary": "Register new user",
+                "description": "Register a new user and add administration privileges to the user",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User object that we want to be added to the database",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "email",
+                                "password",
+                                "confirmPassword"
+                            ],
+                            "properties": {
+                                "email": {
+                                    "type": "string",
+                                    "uniqueItems": true
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "uniqueItems": true
+                                },
+                                "confirmPassword": {
+                                    "type": "string",
+                                    "uniqueItems": true
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "User created successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized! Please first login"
+                    },
+                    "403": {
+                        "description": "User with details ( nationalId / phone / email ) already exist"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            },
+            "get": {
+                "tags": ["Authentication"],
+                "summary": "Get all registered users",
+                "description": "Get all user data",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer token for user authorization",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "All users"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/v1/api/user/current": {
+            "get": {
+                "tags": ["Authentication"],
+                "summary": "Get an existing user data",
+                "description": "Get an existing user data",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer token for user authorization",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User found"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/v1/api/user/login": {
+            "post": {
+                "tags": ["Authentication"],
+                "summary": "Login an existing user",
+                "description": "Login an existing user",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User object that we want to be authenaticated",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "required": ["email", "password", "rememberMe"],
+                            "properties": {
+                                "email": {
+                                    "type": "string",
+                                    "uniqueItems": true
+                                },
+                                "password": {
+                                    "type": "string"
+                                },
+                                "rememberMe": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "You are logged in"
+                    },
+                    "400": {
+                        "description": "Incorrect email or password"
+                    },
+                    "404": {
+                        "description": "Incorrect email or password"
+                    }
+                }
+            }
+        },
+        "/v1/api/equipment/": {
+            "post": {
+                "tags": ["Equipments"],
+                "summary": "Equipment Management",
+                "description": "Equipment Management",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Equipment Management",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "firstName",
+                                "lastName",
+                                "nationalId",
+                                "serialNumber",
+                                "email",
+                                "department",
+                                "position",
+                                "laptopManufacturer",
+                                "model",
+                                "telephone"
+                            ],
+                            "properties": {
+                                "firstName": {
+                                    "type": "string",
+                                    "uniqueItems": true
+                                },
+                                "lastName": {
+                                    "type": "string",
+                                    "uniqueItems": true
+                                },
+                                "nationalId": {
+                                    "type": "string",
+                                    "uniqueItems": true
+                                },
+                                "serialNumber": {
+                                    "type": "string",
+                                    "uniqueItems": true
+                                },
+                                "email": {
+                                    "type": "string",
+                                    "uniqueItems": true
+                                },
+                                "department": {
+                                    "type": "string",
+                                    "uniqueItems": true
+                                },
+                                "position": {
+                                    "type": "string",
+                                    "uniqueItems": true
+                                },
+                                "laptopManufacturer": {
+                                    "type": "string",
+                                    "uniqueItems": true
+                                },
+                                "model": {
+                                    "type": "string",
+                                    "uniqueItems": true
+                                },
+                                "telephone" : {
+                                    "type": "string",
+                                    "uniqueItems": true
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "You are logged in"
+                    },
+                    "400": {
+                        "description": "Incorrect email or password"
+                    },
+                    "404": {
+                        "description": "Incorrect email or password"
+                    }
+                }
+            },
+            "get": {
+                "tags": ["Equipments"],
+                "summary": "Get all Equipments",
+                "description": "Get all Equipment data",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer token for user authorization",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "All Equipments"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        }
+    }
+}

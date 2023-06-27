@@ -1,0 +1,28 @@
+{
+  "name": "rest-full-service",
+  "version": "1.0.0",
+  "description": "Rest-full Services Backend API practice",
+  "main": "server.js",
+  "scripts": {
+    "start": "node -r esm .",
+    "dev": "nodemon -r esm .",
+    "heroku-postbuild": "node -r esm"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.1.4",
+    "esm": "^3.2.25",
+    "express": "^4.18.2",
+    "joi": "^17.9.2",
+    "jsonwebtoken": "^9.0.0",
+    "lodash": "^4.17.21",
+    "mongoose": "^6.7.3",
+    "mongoose-paginate-v2": "^1.7.1",
+    "morgan": "^1.10.0",
+    "pg": "^8.11.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.3",
+    "uuid": "^9.0.0"
+  }
+}
