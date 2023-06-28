@@ -1,0 +1,99 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is the documentation for Abijuru Seth NE Embedded Systems APIs",
+        "version": "1.0.0",
+        "title": "NE End Year 3 APIs Service Documentation",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "email": "abiheloaf@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "host": "localhost:5000",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Weather Statistics",
+            "description": "All APIS which are related to weather records.",
+            "externalDocs": {
+                "description": "Weather Records and Data Statistics",
+                "url": "http://localhost:3000/dashboard"
+            }
+        }
+    ],
+    "schemes": ["http", "https"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+        "/v1/api/weather/": {
+            "post": {
+                "tags": ["Weather Statistics"],
+                "summary": "Create New Weather Record",
+                "description": "Record new weather record in a database for future analysis and statistics",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Weather record object that we want to be added to the database",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "temperature",
+                                "humidity"
+                            ],
+                            "properties": {
+                                "temperature": {
+                                    "type": "number",
+                                    "uniqueItems": true
+                                },
+                                "humidity": {
+                                    "type": "number",
+                                    "uniqueItems": true
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Record created successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized! Please first login"
+                    },
+                    "403": {
+                        "description": "Action forbidden"
+                    },
+                    "404": {
+                        "description": "Record not found"
+                    }
+                }
+            },
+            "get": {
+                "tags": ["Weather Statistics"],
+                "summary": "Get all registered weather records",
+                "description": "Get all weather record data",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "All weather records"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        }
+    }
+}
